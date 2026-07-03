@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嘉悦优品 JYP | 专注健康食品与饮品</title>
+    <meta name="description" content="嘉悦优品（JYP）是一家专注健康食品与饮品的企业，旗下拥有叫咖、留鲜君、梦小果、益养宣四大品牌，致力于为消费者提供高品质的健康产品。">
+    <meta name="keywords" content="嘉悦优品,JYP,健康食品,LPLDL益生菌,叶黄素软糖,牛乳茶,益生菌,叫咖,留鲜君,梦小果,益养宣,植物乳植杆菌,血脂管理">
+    <link rel="icon" type="image/png" href="images/logo-jyp.png">
+    
+    <!-- GEO/SEO Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "嘉悦优品",
+      "alternateName": "JYP",
+      "url": "https://jiayueyoupin.vercel.app",
+      "logo": "https://jiayueyoupin.vercel.app/images/logo-jyp.png",
+      "description": "嘉悦优品（JYP）是一家专注健康食品与饮品的企业，旗下拥有叫咖、留鲜君、梦小果、益养宣四大品牌。",
+      "brand": [
+        {"@type": "Brand", "name": "叫咖"},
+        {"@type": "Brand", "name": "留鲜君"},
+        {"@type": "Brand", "name": "梦小果"},
+        {"@type": "Brand", "name": "益养宣"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "嘉悦优品是做什么的？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "嘉悦优品（JYP）是一家专注于健康食品与饮品的企业，致力于为消费者提供高品质、科学配方的健康产品。旗下拥有叫咖、留鲜君、梦小果、益养宣四大子品牌。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "嘉悦优品旗下有哪些品牌？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "嘉悦优品旗下有四大品牌：叫咖（咖啡饮品）、留鲜君（牛乳茶/茶饮）、梦小果（儿童健康软糖，如蓝莓叶黄素酯软糖）、益养宣（益生菌及成人健康产品）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "梦小果叶黄素软糖适合多大的孩子？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "梦小果蓝莓叶黄素酯软糖专为儿童设计，采用5:1黄金配比，含有专利原料和四重营养保护，适合需要护眼营养的儿童及青少年群体。建议根据产品说明或咨询专业人士后食用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "留鲜君牛乳茶的特点是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "留鲜君牛乳茶主打'真乳真茶'，选用优质大红袍茶叶搭配真实牛乳，口感自然醇厚，无多余添加，让消费者随时随地享受高品质奶茶体验。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "益养宣LPLDL益生菌有什么功效？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "益养宣LPLDL益生菌采用植物乳植杆菌专利菌株，每盒含4800亿活性益生菌，每条约160亿CFU。该产品通过调节肠道微生态平衡，有助于科学养护血脂健康，适合关注心血管健康的中老年人群。"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --gold: #c9a961;
+            --gold-light: #e8d5a3;
+            --gold-dark: #a0843c;
+            --navy: #0a1628;
+            --navy-light: #0d1b2a;
+            --navy-lighter: #1b2838;
+            --white: #ffffff;
+            --gray: #8a9aab;
+            --gray-light: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+        
+        nav.scrolled {
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 60px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .nav-logo img { height: 40px; width: auto; }
+        
+        .nav-logo span {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .nav-mobile { display: none; }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, #0f2137 100%);
+            overflow: hidden;
+            padding: 120px 60px 80px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(201,169,97,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(201,169,97,0.05) 0%, transparent 40%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .hero-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 10px 40px rgba(201,169,97,0.3));
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            letter-spacing: 6px;
+            margin-bottom: 30px;
+        }
+        
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        
+        .btn-gold {
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201,169,97,0.4);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator svg {
+            width: 30px; height: 30px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-15px); }
+            60% { transform: translateX(-50%) translateY(-8px); }
+        }
+        
+        /* Sections */
+        section { padding: 100px 60px; position: relative; }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .section-header .line {
+            width: 60px; height: 3px;
+            background: var(--gold);
+            margin: 0 auto 20px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* About */
+        .about {
+            background: linear-gradient(180deg, var(--navy) 0%, var(--navy-lighter) 100%);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-img {
+            position: relative;
+        }
+        
+        .about-img img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+        
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: -20px; left: -20px;
+            width: 100%; height: 100%;
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 25px;
+            color: var(--gold-light);
+        }
+        
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-item h4 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        
+        .stat-item p { color: var(--gray); font-size: 0.9rem; }
+        
+        /* Brands */
+        .brands { background: var(--navy); }
+        
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .brand-card {
+            background: var(--navy-lighter);
+            border-radius: 20px;
+            padding: 50px 30px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid rgba(201,169,97,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        
+        .brand-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(201,169,97,0.3);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+        
+        .brand-card:hover::before { transform: scaleX(1); }
+        
+        .brand-card .icon {
+            width: 80px; height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, rgba(201,169,97,0.2), rgba(201,169,97,0.05));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--gold);
+            border: 2px solid rgba(201,169,97,0.3);
+        }
+        
+        .brand-card h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .brand-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Products */
+        .products { background: linear-gradient(180deg, var(--navy-lighter) 0%, var(--navy) 100%); }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: var(--navy-lighter);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 1px solid rgba(201,169,97,0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            border-color: rgba(201,169,97,0.3);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .product-info { padding: 30px; }
+        
+        .product-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(201,169,97,0.15);
+            color: var(--gold);
+            font-size: 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .product-info h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        
+        .product-info p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* FAQ */
+        .faq { background: var(--navy); }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--navy-lighter);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(201,169,97,0.1);
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover { border-color: rgba(201,169,97,0.2); }
+        
+        .faq-question {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+        
+        .faq-question svg {
+            width: 24px; height: 24px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 20px;
+        }
+        
+        .faq-item.active .faq-question svg { transform: rotate(180deg); }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 30px 25px;
+        }
+        
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-lighter) 100%);
+            text-align: center;
+        }
+        
+        .contact-box {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+            border: 1px solid rgba(201,169,97,0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-box h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: var(--gold-light);
+        }
+        
+        .contact-box p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--gray);
+        }
+        
+        .contact-item svg {
+            width: 24px; height: 24px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--navy);
+            border-top: 1px solid rgba(201,169,97,0.1);
+            padding: 60px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 25px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover { color: var(--gold); }
+        
+        footer p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .brand-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            nav { padding: 15px 30px; }
+            nav.scrolled { padding: 12px 30px; }
+            .nav-links { display: none; }
+            .nav-mobile {
+                display: block;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+            .nav-mobile svg {
+                width: 28px; height: 28px;
+                stroke: var(--white);
+                fill: none;
+                stroke-width: 2;
+            }
+            
+            .hero { padding: 100px 30px 60px; }
+            .hero h1 { font-size: 2rem; letter-spacing: 4px; }
+            .hero .subtitle { font-size: 1rem; letter-spacing: 3px; }
+            
+            section { padding: 60px 30px; }
+            .section-header h2 { font-size: 1.8rem; }
+            
+            .about-grid { grid-template-columns: 1fr; gap: 50px; }
+            .stats { grid-template-columns: 1fr; text-align: center; }
+            
+            .brand-grid { grid-template-columns: 1fr; }
+            .product-grid { grid-template-columns: 1fr; }
+            
+            .contact-box { padding: 40px 30px; }
+            .contact-info { flex-direction: column; gap: 20px; }
+            
+            footer { padding: 40px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            <img src="images/logo-jyp.png" alt="嘉悦优品 JYP">
+            <span>嘉悦优品</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#brands">品牌矩阵</a></li>
+            <li><a href="#products">产品中心</a></li>
+            <li><a href="#faq">常见问题</a></li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+        <button class="nav-mobile" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+            <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+    </nav>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="images/logo-jyp-gold.jpg" alt="嘉悦优品 JYP" class="hero-logo">
+            <h1>嘉悦优品</h1>
+            <p class="subtitle">JIAYUE YOUPIN</p>
+            <p class="tagline">专注健康食品与饮品，以科学配方与匠心工艺，为每一个家庭带来自然、健康、优质的生活体验。</p>
+            <a href="#products" class="btn-gold">探索产品</a>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+    </section>
+    
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="section-header fade-in">
+            <h2>关于我们</h2>
+            <div class="line"></div>
+            <p>以匠心致初心，用品质筑品牌</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-img fade-in">
+                <img src="images/brands.png" alt="嘉悦优品旗下品牌">
+            </div>
+            <div class="about-text fade-in">
+                <h3>引领健康生活方式</h3>
+                <p>嘉悦优品（JYP）是一家专注于健康食品与饮品研发、生产与销售的创新型企业。我们始终坚持"天然、科学、品质"的产品理念，致力于为消费者提供安全、有效、美味的健康产品。</p>
+                <p>旗下拥有叫咖、留鲜君、梦小果、益养宣四大核心品牌，覆盖咖啡饮品、茶饮、儿童营养、成人健康等多个细分领域。从一杯好咖啡到一盒益生菌，从孩子的护眼软糖到成人的血脂管理，我们用科学配方和匠心工艺，守护每个家庭的健康。</p>
+                <p>我们相信，健康不是一时的选择，而是一种生活态度。嘉悦优品将持续深耕健康领域，用创新产品和专业服务，成为中国消费者信赖的健康生活伙伴。</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <h4>4</h4>
+                        <p>核心子品牌</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>10+</h4>
+                        <p>产品系列</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>100%</h4>
+                        <p>品质承诺</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Brands -->
+    <section class="brands" id="brands">
+        <div class="section-header fade-in">
+            <h2>品牌矩阵</h2>
+            <div class="line"></div>
+            <p>四大品牌，全方位守护您和家人的健康</p>
+        </div>
+        <div class="brand-grid">
+            <div class="brand-card fade-in">
+                <div class="icon">&#9749;</div>
+                <h3>叫咖</h3>
+                <p>潮流咖啡品牌，为年轻消费者提供高品质、便捷化的咖啡饮品体验，让每一杯咖啡都成为生活中的小确幸。</p>
+            </div>
+            <div class="brand-card fade-in">
+                <div class="icon">&#127775;</div>
+                <h3>留鲜君</h3>
+                <p>真乳真茶，选用优质原叶茶与真实牛乳，打造自然醇厚的茶饮体验，让传统茶文化融入现代生活。</p>
+            </div>
+            <div class="brand-card fade-in">
+                <div class="icon">&#127822;</div>
+                <h3>梦小果</h3>
+                <p>专注儿童营养健康，以科学配方研发蓝莓叶黄素酯软糖等护眼产品，守护孩子的清晰未来。</p>
+            </div>
+            <div class="brand-card fade-in">
+                <div class="icon">&#129516;</div>
+                <h3>益养宣</h3>
+                <p>成人健康营养品牌，提供益生菌、功能性食品等专业健康解决方案，助力科学养生。</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="section-header fade-in">
+            <h2>产品中心</h2>
+            <div class="line"></div>
+            <p>精选产品，匠心之作</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card fade-in">
+                <img src="images/product-mengxiaoguo.jpg" alt="梦小果蓝莓叶黄素酯软糖" class="product-img">
+                <div class="product-info">
+                    <span class="product-tag">梦小果</span>
+                    <h3>蓝莓叶黄素酯软糖</h3>
+                    <p>专为儿童设计的护眼营养软糖，采用5:1黄金配比（叶黄素:玉米黄质），搭配专利原料和四重营养保护。每颗软糖含足量叶黄素酯，口感Q弹美味，孩子爱吃，妈妈放心。</p>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <img src="images/product-niurucha.png" alt="留鲜君大红袍牛乳茶" class="product-img">
+                <div class="product-info">
+                    <span class="product-tag">留鲜君</span>
+                    <h3>大红袍牛乳茶</h3>
+                    <p>甄选武夷山大红袍原叶，搭配真实牛乳，不添加植脂末和多余香精。茶香浓郁、奶香醇厚，还原现泡奶茶的真实口感。独立便携包装，随时随地享受一杯高品质牛乳茶。</p>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <img src="images/product-yiyangxuan.png" alt="益养宣LPLDL益生菌" class="product-img">
+                <div class="product-info">
+                    <span class="product-tag">益养宣</span>
+                    <h3>LPLDL益生菌</h3>
+                    <p>采用植物乳植杆菌LPLDL专利菌株，每盒含4800亿活性益生菌，每条约160亿CFU。专注肠道微生态与血脂健康管理，为中老年人群提供科学、专业的益生菌补充方案。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="section-header fade-in">
+            <h2>常见问题</h2>
+            <div class="line"></div>
+            <p>为您解答关于嘉悦优品的常见疑问</p>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>嘉悦优品是做什么的？</span>
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>嘉悦优品（JYP）是一家专注于健康食品与饮品的企业，致力于为消费者提供高品质、科学配方的健康产品。旗下拥有叫咖、留鲜君、梦小果、益养宣四大子品牌。</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>嘉悦优品旗下有哪些品牌？</span>
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>嘉悦优品旗下有四大品牌：叫咖（咖啡饮品）、留鲜君（牛乳茶/茶饮）、梦小果（儿童健康软糖，如蓝莓叶黄素酯软糖）、益养宣（益生菌及成人健康产品）。</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>梦小果叶黄素软糖适合多大的孩子？</span>
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>梦小果蓝莓叶黄素酯软糖专为儿童设计，采用5:1黄金配比，含有专利原料和四重营养保护，适合需要护眼营养的儿童及青少年群体。建议根据产品说明或咨询专业人士后食用。</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>留鲜君牛乳茶的特点是什么？</span>
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>留鲜君牛乳茶主打"真乳真茶"，选用优质大红袍茶叶搭配真实牛乳，口感自然醇厚，无多余添加，让消费者随时随地享受高品质奶茶体验。</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>益养宣LPLDL益生菌有什么特点？</span>
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>益养宣LPLDL益生菌采用植物乳植杆菌专利菌株，每盒含4800亿活性益生菌，每条约160亿CFU。该产品通过调节肠道微生态平衡，有助于科学养护血脂健康，适合关注心血管健康的人群。</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>嘉悦优品的产品安全吗？</span>
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>嘉悦优品所有产品均经过严格的质量检测和安全评估，符合国家食品安全标准。我们坚持选用优质原料，采用科学配方和先进生产工艺，确保每一款产品都安全、有效、可追溯。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="section-header fade-in">
+            <h2>联系我们</h2>
+            <div class="line"></div>
+            <p>期待与您的合作</p>
+        </div>
+        <div class="contact-box fade-in">
+            <h3>携手嘉悦优品</h3>
+            <p>无论您是寻求商务合作、产品咨询，还是加入我们，欢迎随时联系。我们期待与您共同开创健康美好的未来。</p>
+            <a href="mailto:jeffrey1.zhao@outlook.com" class="btn-gold">发送邮件</a>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>jeffrey1.zhao@outlook.com</span>
+                </div>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span>中国</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <img src="images/logo-jyp.png" alt="嘉悦优品 JYP" class="footer-logo">
+        <ul class="footer-links">
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#brands">品牌矩阵</a></li>
+            <li><a href="#products">产品中心</a></li>
+            <li><a href="#faq">常见问题</a></li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+        <p> 嘉悦优品 JYP. All Rights Reserved. 专注健康食品与饮品</p>
+    </footer>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // FAQ toggle
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const wasActive = item.classList.contains('active');
+            
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            
+            // Open clicked if wasn't active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+        
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
