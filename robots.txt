@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jeffreyzhaobin.github.io/yiyangxuan-geo/sitemap.xml
