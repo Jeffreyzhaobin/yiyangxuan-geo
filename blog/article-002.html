@@ -391,6 +391,17 @@
         </button>
     </nav>
 
+    <!-- Mobile Nav Menu -->
+    <div id="mobile-nav" style="display:none;position:fixed;top:80px;left:0;right:0;z-index:999;background:rgba(10,22,40,0.95);backdrop-filter:blur(20px);padding:20px;text-align:center;">
+        <a href="../index.html#about" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">关于我们</a>
+        <a href="../index.html#brands" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">品牌矩阵</a>
+        <a href="../index.html#products" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">产品中心</a>
+        <a href="index.html" style="display:block;color:#c9a961;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">健康科普</a>
+        <a href="../index.html#faq" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">常见问题</a>
+        <a href="../index.html#contact" style="display:block;color:#fff;padding:15px;text-decoration:none;font-size:1.1rem;" onclick="toggleMobileNav()">联系我们</a>
+    </div>
+
+
     <!-- Breadcrumb -->
     <div class="breadcrumb">
         <a href="../index.html">首页</a>
@@ -582,23 +593,10 @@
         </div>
     </footer>
 
-    <script>
+        <script>
         function toggleMobileNav() {
-            const links = document.querySelector('.nav-links');
-            if (links.style.display === 'flex') {
-                links.style.display = 'none';
-            } else {
-                links.style.display = 'flex';
-                links.style.flexDirection = 'column';
-                links.style.position = 'absolute';
-                links.style.top = '80px';
-                links.style.left = '0';
-                links.style.right = '0';
-                links.style.background = 'rgba(10,22,40,0.98)';
-                links.style.padding = '20px';
-                links.style.gap = '20px';
-                links.style.borderBottom = '1px solid rgba(201,169,97,0.1)';
-            }
+            const nav = document.getElementById('mobile-nav');
+            nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
         }
     </script>
 </body>
