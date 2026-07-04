@@ -398,9 +398,10 @@
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background: 
-                linear-gradient(180deg, transparent 0%, rgba(10,22,40,0.3) 50%, rgba(10,22,40,0.8) 100%),
-                linear-gradient(0deg, transparent 0%, rgba(10,22,40,0.5) 30%, transparent 60%);
+                linear-gradient(180deg, transparent 0%, var(--hero-overlay-mid, rgba(10,22,40,0.3)) 50%, var(--hero-overlay-bottom, rgba(10,22,40,0.8)) 100%),
+                linear-gradient(0deg, transparent 0%, var(--hero-overlay-bottom2, rgba(10,22,40,0.5)) 30%, transparent 60%);
             pointer-events: none;
+            transition: all 90s linear;
         }
         
         /* Hexagonal Grid Overlay */
@@ -2301,6 +2302,15 @@
                 hero.style.setProperty('--hero-glow4', rgba(theme.tint, 0.06));
                 hero.style.setProperty('--hero-glow5', rgba(theme.glow, 0.04));
                 hero.style.setProperty('--hero-glow-top', rgba(theme.glow, 0.12));
+                // Overlay darkness - lighter in day, darker at night
+                const brightness = (theme.bg[0] + theme.bg[1] + theme.bg[2]) / 3;
+                const dayFactor = Math.min(1, brightness / 60);
+                const midAlpha = 0.1 + (1 - dayFactor) * 0.25;
+                const botAlpha = 0.3 + (1 - dayFactor) * 0.6;
+                const bot2Alpha = 0.15 + (1 - dayFactor) * 0.4;
+                hero.style.setProperty('--hero-overlay-mid', `rgba(5, 10, 22, ${midAlpha.toFixed(2)})`);
+                hero.style.setProperty('--hero-overlay-bottom', `rgba(3, 6, 14, ${botAlpha.toFixed(2)})`);
+                hero.style.setProperty('--hero-overlay-bottom2', `rgba(5, 10, 22, ${bot2Alpha.toFixed(2)})`);
             }
             if (grid) grid.style.opacity = theme.gridOpacity;
             if (scanlines) scanlines.style.opacity = theme.gridOpacity * 0.5;
