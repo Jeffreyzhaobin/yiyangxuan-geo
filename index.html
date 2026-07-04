@@ -1015,29 +1015,78 @@
         
         .product-img-wrapper {
             width: 100%;
-            height: 320px;
+            height: 340px;
             overflow: hidden;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Product glow behind the product */
+        .product-img-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%; height: 70%;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--product-glow, rgba(100,150,255,0.15)) 0%, transparent 70%);
+            filter: blur(20px);
+            transition: all 0.6s ease;
+            pointer-events: none;
+        }
+        
+        .product-card:hover .product-img-wrapper::before {
+            width: 90%;
+            height: 80%;
+            opacity: 1.3;
+            filter: blur(25px);
         }
         
         .product-img {
-            width: 100%;
-            height: 100%;
+            width: auto;
+            height: 85%;
+            max-width: 90%;
             object-fit: contain;
             display: block;
-            transition: transform 0.6s;
+            transition: transform 0.6s ease;
+            position: relative;
+            z-index: 1;
         }
         
         .product-card:hover .product-img {
-            transform: scale(1.1);
+            transform: scale(1.08) translateY(-5px);
         }
         
         .product-img-overlay {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 50%;
-            background: linear-gradient(to top, var(--navy-card), transparent);
-            opacity: 0.8;
+            display: none;
+        }
+        
+        /* Product glow colors - each product has unique theme */
+        .product-glow-warm .product-img-wrapper::before {
+            background: radial-gradient(circle, rgba(255, 140, 60, 0.18) 0%, rgba(255, 100, 50, 0.08) 40%, transparent 70%);
+        }
+        .product-glow-warm:hover .product-img-wrapper::before {
+            background: radial-gradient(circle, rgba(255, 160, 80, 0.28) 0%, rgba(255, 120, 60, 0.12) 40%, transparent 70%);
+        }
+        
+        .product-glow-duo .product-img-wrapper::before {
+            background: 
+                radial-gradient(ellipse 40% 60% at 30% 50%, rgba(255, 80, 80, 0.2) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 60% at 70% 50%, rgba(60, 120, 255, 0.2) 0%, transparent 60%);
+        }
+        .product-glow-duo:hover .product-img-wrapper::before {
+            background: 
+                radial-gradient(ellipse 45% 65% at 30% 50%, rgba(255, 100, 100, 0.3) 0%, transparent 60%),
+                radial-gradient(ellipse 45% 65% at 70% 50%, rgba(80, 140, 255, 0.3) 0%, transparent 60%);
+        }
+        
+        .product-glow-cool .product-img-wrapper::before {
+            background: radial-gradient(circle, rgba(80, 150, 255, 0.18) 0%, rgba(60, 120, 230, 0.08) 40%, transparent 70%);
+        }
+        .product-glow-cool:hover .product-img-wrapper::before {
+            background: radial-gradient(circle, rgba(100, 170, 255, 0.28) 0%, rgba(80, 140, 255, 0.12) 40%, transparent 70%);
         }
         
         .product-info { padding: 35px; }
@@ -1615,9 +1664,9 @@
             <p>精选产品，匠心之作</p>
         </div>
         <div class="product-grid">
-            <div class="product-card fade-in">
+            <div class="product-card fade-in product-glow-warm">
                 <div class="product-img-wrapper">
-                    <img src="images/product-mengxiaoguo-v3.jpg" alt="梦小果蓝莓叶黄素酯软糖" class="product-img">
+                    <img src="images/product-mengxiaoguo-transparent.png" alt="梦小果蓝莓叶黄素酯软糖" class="product-img">
                     <div class="product-img-overlay"></div>
                 </div>
                 <div class="product-info">
@@ -1632,9 +1681,9 @@
                     </div>
                 </div>
             </div>
-            <div class="product-card fade-in">
+            <div class="product-card fade-in product-glow-duo">
                 <div class="product-img-wrapper">
-                    <img src="images/product-niurucha-v5.jpg" alt="留鲜君牛乳茶系列 - 茉莉奶绿 & 大红袍" class="product-img">
+                    <img src="images/product-niurucha-transparent.png" alt="留鲜君牛乳茶系列 - 茉莉奶绿 & 大红袍" class="product-img">
                     <div class="product-img-overlay"></div>
                 </div>
                 <div class="product-info">
@@ -1649,9 +1698,9 @@
                     </div>
                 </div>
             </div>
-            <div class="product-card fade-in">
+            <div class="product-card fade-in product-glow-cool">
                 <div class="product-img-wrapper">
-                    <img src="images/product-yiyangxuan-v5.jpg" alt="益养宣LPLDL益生菌" class="product-img">
+                    <img src="images/product-yiyangxuan.png" alt="益养宣LPLDL益生菌" class="product-img">
                     <div class="product-img-overlay"></div>
                 </div>
                 <div class="product-info">
